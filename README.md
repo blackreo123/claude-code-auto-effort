@@ -108,7 +108,9 @@ The `xhigh` ceiling reflects today's Claude Code. To avoid hardcoding it:
 - 🛡 **Fail-open:** any classifier error/timeout lets the prompt through untouched. The hook never blocks (always exits 0).
 - 🔁 The classifier's own `claude` call is guarded against recursively triggering the hook.
 - 🧢 Real effort tops out at `xhigh` (see above); `ultrathink` covers max-level turns.
-- ❓ Whether a hook-injected `ultrathink` triggers the *formal* thinking-budget path is undocumented; the directive text steers behavior regardless. Whether the `effortLevel` hot-reload applies same-turn vs next-turn depends on Claude Code internals — verify with the effort indicator.
+- ❓ Whether a hook-injected `ultrathink` triggers the *formal* thinking-budget path is undocumented; the directive text steers behavior regardless.
+- ✅ **Hot-reload verified (next-turn):** editing `effortLevel` in the watched settings file is re-read and applied on the **next** prompt. Measured on Opus (Claude Code 2.1.177, Windows) via a persistent stream-json session — flipping `low→xhigh` between turns raised reasoning to 1.42× vs a 0.92× same-effort control (n=1).
+- ⚠️ **This can vary by environment**, so confirm in yours: the hot-reload / read-once set can change between **Claude Code versions**; a manual `/effort` or `CLAUDE_CODE_EFFORT_LEVEL` **shadows** the settings write (so it looks like nothing happens); file-watcher behavior differs on some filesystems (network drives, WSL); and interactive-TUI *same-turn* application isn't separately confirmed. Check via the `with <level> effort` indicator (see [Verify](#verify-its-working)).
 - 🧠 The classifier sees prompt text only (no codebase/conversation context), so deceptively-simple prompts can be under-rated; it errs toward *higher* effort, which is the safe direction.
 
 ## Uninstall

@@ -153,8 +153,9 @@ auto_effort/
 - 🛡 **절대 막지 않음(fail-open):** 분류 실패·타임아웃·파일 쓰기 실패 시 프롬프트는 그대로 통과. 훅은 항상 exit 0.
 - 🔁 **재귀 방지:** 분류용 `claude -p`가 훅을 다시 부르지 않도록 `AUTO_EFFORT_CLASSIFYING` 환경변수로 차단.
 - 🧢 **실제 effort는 현재 `xhigh`가 상한** (`max`/`ultracode`는 settings로 표현 불가 → 지시문이 보완). 단 이 천장은 `calibrate.js`가 **자동 감지**하므로, 향후 버전이 `max`를 받으면 자동으로 풀립니다([업데이트 대응](#업데이트-대응--effort-천장-자동-감지)).
-- ⏳ **타이밍:** `writeEffortLevel`은 다음 턴에 반영될 수 있음. 같은 턴 효과는 `injectDirective`가 책임.
-- ❓ `effortLevel` 핫리로드는 문서 추론 → [검증](#실제-effort-변경-검증) 필수.
+- ⏳ **타이밍:** `writeEffortLevel`은 **다음 턴**에 반영됩니다. 같은 턴 효과는 `injectDirective`가 책임.
+- ✅ **핫리로드 검증됨(next-turn):** watched settings의 `effortLevel` 변경이 다음 프롬프트에 재적용됨. Opus(CC 2.1.177, Windows) + 영속 stream-json으로 측정 — 턴 사이 `low→xhigh` 전환 시 추론량이 동일-effort 대조군 0.92× 대비 **1.42×**(n=1).
+- ⚠️ **환경마다 다를 수 있으니 본인 환경에서 확인하세요.** hot-reload/read-once 목록은 **Claude Code 버전**마다 바뀔 수 있고, 수동 `/effort`나 `CLAUDE_CODE_EFFORT_LEVEL`이 settings 기록을 **가리며**(아무 일도 안 일어난 것처럼 보임), 파일워처 동작은 일부 FS(네트워크 드라이브·WSL)에서 다릅니다. 인터랙티브 TUI의 *같은 턴* 적용도 별도 미확인. `with <level> effort` 인디케이터로 확인하세요.
 
 ---
 
