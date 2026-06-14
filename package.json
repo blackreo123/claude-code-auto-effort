@@ -1,0 +1,34 @@
+{
+  "name": "claude-code-auto-effort",
+  "version": "0.1.0",
+  "description": "Automatically set Claude Code's reasoning effort per prompt: a UserPromptSubmit hook that classifies each prompt with Haiku, writes the real effort level (via settings hot-reload), and injects an ultrathink directive for hard tasks.",
+  "type": "commonjs",
+  "bin": {
+    "auto-effort-install": "hook/install.js"
+  },
+  "scripts": {
+    "setup": "node hook/install.js",
+    "remove": "node hook/uninstall.js",
+    "calibrate": "node hook/calibrate.js"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "hook",
+    "effort",
+    "ultrathink",
+    "reasoning",
+    "UserPromptSubmit",
+    "automation"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "files": [
+    "hook/",
+    "README.md",
+    "README.ko.md",
+    "LICENSE"
+  ]
+}

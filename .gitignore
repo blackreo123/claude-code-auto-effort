@@ -1,0 +1,14 @@
+# Machine-specific / generated at install or runtime
+hook/config.json
+hook/capability.json
+hook/auto-effort.log
+hook/*.log
+*.bak
+
+# Per-machine Claude Code settings (the installer writes these to your real
+# settings file, not into the repo). Never commit absolute paths / local state.
+.claude/
+
+# Node
+node_modules/
+npm-debug.log*

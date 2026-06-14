@@ -1,0 +1,16 @@
+{
+  "model": "haiku",
+  "classifierEffort": "low",
+  "timeoutMs": 12000,
+  "maxPromptChars": 4000,
+  "minPromptChars": 1,
+  "skipSlashCommands": true,
+  "showSystemMessage": true,
+  "log": true,
+  "claudePath": "claude",
+  "injectDirective": true,
+  "writeEffortLevel": true,
+  "effortFor": { "low": "low", "medium": "medium", "high": "high", "max": "max" },
+  "safeCeiling": "xhigh",
+  "settingsLocalPath": null
+}
